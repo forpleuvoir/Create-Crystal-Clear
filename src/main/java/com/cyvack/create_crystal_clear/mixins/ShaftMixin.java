@@ -44,14 +44,13 @@ public class ShaftMixin {
 
         for (GlassEncasedShaftBlock glassEncasedShaftBlock : encasedShaft3) {
 
-            if (!glassEncasedShaftBlock.getCasing()
-                    .isIn(heldItem))
+            if (!glassEncasedShaftBlock.getCasing().isIn(heldItem))
                 continue;
 
             if (world.isClientSide)
                 cir.setReturnValue(InteractionResult.SUCCESS);
 
-            KineticBlockEntity.switchToBlockState(world, pos, glassEncasedShaftBlock.getCasing().getDefaultState()
+            KineticBlockEntity.switchToBlockState(world, pos, glassEncasedShaftBlock.defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS)));
             cir.setReturnValue(InteractionResult.SUCCESS);
         }

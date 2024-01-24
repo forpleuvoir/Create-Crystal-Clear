@@ -65,7 +65,7 @@ public abstract class CogwheelMixin {
             if (world.isClientSide)
                 cir.setReturnValue(InteractionResult.SUCCESS);
 
-            BlockState encasedState = glassEncasedCogwheel.getCasing().getDefaultState()
+            BlockState encasedState = glassEncasedCogwheel.defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS));
 
             for (Direction d : Iterate.directionsInAxis(state.getValue(AXIS))) {
