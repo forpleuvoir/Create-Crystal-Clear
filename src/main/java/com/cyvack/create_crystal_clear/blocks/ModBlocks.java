@@ -4,19 +4,26 @@ import com.cyvack.create_crystal_clear.*;
 import com.cyvack.create_crystal_clear.blocks.glass_casings.GlassCasing;
 import com.cyvack.create_crystal_clear.blocks.glass_encased_cogwheel.GlassEncasedCogwheel;
 import com.cyvack.create_crystal_clear.blocks.glass_encased_shaft.GlassEncasedShaftBlock;
-import com.simibubi.create.content.contraptions.components.crusher.CrushingWheelControllerBlock;
+//import com.simibubi.create.content.contraptions.components.crusher.CrushingWheelControllerBlock;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.List;
 
 import static com.cyvack.create_crystal_clear.data_gen.BlockBuilders.*;
 
 public class ModBlocks {
-	private static final
-	CreateRegistrate REGISTRATE = Create_Crystal_Clear.registrate().creativeModeTab(() -> CrystalClearTab.GLASS_TAB);
+
+
+	public static final
+	CreateRegistrate REGISTRATE = Create_Crystal_Clear.registrate().setCreativeTab(CrystalClearTab.GLASS_TAB);
 
 	//Casings
 
@@ -76,5 +83,37 @@ public class ModBlocks {
 			BRASS_CLEAR_GLASS_ENCASED_LARGE_COGWHEEL = glassEncasedCogwheel("brass", true, true, p -> GlassEncasedCogwheel.brass_clear_glass(true, p)),
 			TRAIN_CLEAR_GLASS_ENCASED_LARGE_COGWHEEL =  glassEncasedCogwheel("train", true, true, p -> GlassEncasedCogwheel.train_clear_glass(true, p));
 
-	public static void register() {}
+
+	public static List<BlockEntry<? extends Block>> blocks= List.of(
+			ANDESITE_GLASS_CASING,
+			BRASS_GLASS_CASING,
+			COPPER_GLASS_CASING,
+			TRAIN_GLASS_CASING,
+			ANDESITE_CLEAR_GLASS_CASING,
+			BRASS_CLEAR_GLASS_CASING,
+			COPPER_CLEAR_GLASS_CASING,
+			TRAIN_CLEAR_GLASS_CASING,
+			ANDESITE_GLASS_ENCASED_SHAFT,
+			ANDESITE_CLEAR_GLASS_ENCASED_SHAFT,
+			BRASS_GLASS_ENCASED_SHAFT,
+			BRASS_CLEAR_GLASS_ENCASED_SHAFT,
+			TRAIN_GLASS_ENCASED_SHAFT,
+			TRAIN_CLEAR_GLASS_ENCASED_SHAFT,
+			ANDESITE_GLASS_ENCASED_COGWHEEL,
+			BRASS_GLASS_ENCASED_COGWHEEL,
+			TRAIN_GLASS_ENCASED_COGWHEEL,
+			ANDESITE_CLEAR_GLASS_ENCASED_COGWHEEL,
+			BRASS_CLEAR_GLASS_ENCASED_COGWHEEL,
+			TRAIN_CLEAR_GLASS_ENCASED_COGWHEEL,
+			ANDESITE_GLASS_ENCASED_LARGE_COGWHEEL,
+			BRASS_GLASS_ENCASED_LARGE_COGWHEEL,
+			TRAIN_GLASS_ENCASED_LARGE_COGWHEEL,
+			ANDESITE_CLEAR_GLASS_ENCASED_LARGE_COGWHEEL,
+			BRASS_CLEAR_GLASS_ENCASED_LARGE_COGWHEEL,
+			TRAIN_CLEAR_GLASS_ENCASED_LARGE_COGWHEEL
+	);
+
+	public static void register(IEventBus eventBus ) {
+		REGISTRATE.registerEventListeners(eventBus);
+	}
 }

@@ -1,7 +1,9 @@
 package com.cyvack.create_crystal_clear;
 
+import com.cyvack.create_crystal_clear.blocks.CrystalClearTab;
 import com.cyvack.create_crystal_clear.blocks.ModBlocks;
-import com.cyvack.create_crystal_clear.blocks.compat.AlloyedCompatBlocks;
+//import com.cyvack.create_crystal_clear.blocks.compat.AlloyedCompatBlocks;
+import com.cyvack.create_crystal_clear.data_gen.BlockBuilders;
 import com.cyvack.create_crystal_clear.tile_entities.ModtileEntities;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -19,25 +21,29 @@ public class Create_Crystal_Clear {
 
     public static final String MOD_ID = "create_crystal_clear";
     public static boolean isAlloyedLoaded = false;
-    private static final NonNullSupplier<CreateRegistrate> REGISTRATE = CreateRegistrate.lazy(MOD_ID);
+    private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
-    public Create_Crystal_Clear(){
+    public Create_Crystal_Clear() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         isAlloyedLoaded = ModList.get().isLoaded("alloyed");
-
-        ModBlocks.register();
-        ModtileEntities.register();
+        REGISTRATE.registerEventListeners(eventBus);
+        REGISTRATE.setCreativeTab(CrystalClearTab.GLASS_TAB);
+        CrystalClearTab.register(eventBus);
+        ModBlocks.register(eventBus);
+        BlockBuilders.register(eventBus);
+        ModtileEntities.register(eventBus);
 
         //compat
-        if (isAlloyedLoaded) {AlloyedCompatBlocks.register();}
+//        if (isAlloyedLoaded) {AlloyedCompatBlocks.register();}
     }
 
 
     public static ResourceLocation asResource(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
+
     public static CreateRegistrate registrate() {
-        return REGISTRATE.get();
+        return REGISTRATE;
     }
 }
